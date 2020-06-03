@@ -1,0 +1,24 @@
+* {
+    background-color: beige;
+}
+
+#header {
+    text-align: center;
+}
+#results {
+    display: none;
+}
+
+#container {
+    max-width: 800px;
+}
+.buttons {
+  margin-left: 50px !important;
+}
+
+.questionsContainer {
+    text-align: left;
+}
+.resultContainer {
+    display: none;
+}
