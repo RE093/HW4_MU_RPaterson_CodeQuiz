@@ -170,7 +170,7 @@ $(document).ready(function() {
                 n++;
                 counter++;
                 questionTime();
-                $("#counter").text(counter)
+                $(".counter").text(counter)
                 if (totalTime < 0) {
                     totalTime = 0;
                 }
@@ -260,7 +260,7 @@ $(document).ready(function() {
     // When the user submits their name
     $(".resultsForm").on("submit", function(event) {
         event.preventDefault();
-        var highScoreText = $("#resultsText").val();
+        var highScoreText = $(".resultsText").val();
         if (highScoreText === "") {
             return;
         };
