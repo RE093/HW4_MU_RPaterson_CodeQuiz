@@ -10,16 +10,18 @@
     <!-- Style link -->
     <link rel="stylesheet" type="text/css" href="style.css"/>
 
-    <title>Document</title>
+    <title>Coding Quiz</title>
 </head>
 <body>
     
     <!-- Main Content -->
-    <div id = "container">
-        <header id = "header">
+    <div class = "container">
+        <header class = "header">
             <h1>Coding quiz challenge</h1>
-            <p id = "scoreOne">Score = <span id = "counter"> 0 </span></p>
-            <p id = "timeOne"> Time Left = <span id = "countDown"> 0 </span></p>
+            <section class = "scoreSection">
+                <p class = "scoreOne">Score = <span class = "counter"> 0 </span></p>
+                <p class = "timeOne"> Time Left = <span class = "countDown"> 0 </span></p>
+            </section>
         </header>
         <div class = "initialPage">
             <p>
@@ -27,21 +29,23 @@
                 noting the timer will start as soon as you do. Once done, you will be
                 directed to enter your name to log your score.
             </p>
-            <button class = "start">
-                Start Quiz
-            </button>
-            <button class = "resultButton">
-                Results
-            </button>
+            <div class = "InitialButtons">
+                <button class = "start">
+                    Start Quiz
+                </button>
+                <button class = "resultButton">
+                    Results
+                </button>
+            </div>
         </div>
         <div class="resultContainer">
-            <h2 id = "results">Results</h2>
-            <form id="resultsForm">
-              <label>High Scores!</label>
-              <input type="text" placeholder="Enter name here"id="resultsText" />
+            <h2 class = "results">Results</h2>
+            <form class ="resultsForm">
+                <label>High Scores!</label>
+                <input type="text" placeholder="Enter name here" class="resultsText" />
             </form>
-            <ul id="resultsList"></ul>
-          </div>
+            <ul class ="resultsList"></ul>
+        </div>
 
         <!-- Questions Container -->
         <ul class = "questionsContainer">

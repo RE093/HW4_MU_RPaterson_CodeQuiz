@@ -1,5 +1,5 @@
 // jQuery initial function
-$(document).ready(function(){
+$(document).ready(function() {
 
     // Questions List
     var questionsArray = [ 
@@ -119,23 +119,24 @@ $(document).ready(function(){
 
     // Questions List is called, initial page is hidden
     function questionTime() {
-        
+
+        // Display setting
         $(".initialPage").css("display", "none");
+        $(".scoreSection").css("display", "block");
+
+        // Show question
         $(".questionsContainer").text(questionsArray[n].question);
         $(".questionsContainer").append($("<hr>"));
     
         // Create Answer List
         for (i = 0; i < 4; i++) {
-            var list = $("<li>")
-            $(list).text((i + 1) + ".")
+            var list = $("<li>");
+            $(list).text((i + 1) + ".");
     
             // Create Answer Buttons
             var newButtons = $("<button>" + questionsArray[n].answers[i] + "</button>");
             newButtons.attr("class", "buttons");
             $(newButtons).attr("value", i);
-            $(newButtons).css("padding", "10px");
-            $(newButtons).css("margin", "10px");
-            newButtons.css("width", "200px");
     
             $(list).append(newButtons);
             $(".questionsContainer").append(list);
@@ -155,10 +156,10 @@ $(document).ready(function(){
                 counter++;
                 getHighScores();
                 resultsPage();
-                $("#counter").text(counter);
+                $(".counter").text(counter);
             }
             if (userAnswer != questionsArray[n].correctAnswer && n === 9) {
-                console.log("thats all")
+                console.log("thats all");
                 getHighScores();
                 resultsPage();
             }
@@ -184,7 +185,7 @@ $(document).ready(function(){
                     totalTime = 0;
                 }
                 questionTime();
-                $("#counter").text(counter)
+                $(".counter").text(counter);
             };
         };
     };
@@ -193,12 +194,12 @@ $(document).ready(function(){
     function startTimer() {
         
         var countingDown = setInterval(function() {
-            $("#countDown").text(totalTime);
+            $(".countDown").text(totalTime);
           totalTime--;
-              
+              console.log(totalTime)
           // What happens when time runs out  
-          if (totalTime === 0) {
-            $("#countDown").text("");
+          if (totalTime === -1) {
+            $(".countDown").text("");
             getHighScores();
             resultsPage();
             clearInterval(countingDown);
@@ -206,23 +207,23 @@ $(document).ready(function(){
           // What happens if questions are finished before time runs out
           else if (n === 9) {
               clearInterval(countingDown);
-          }
+          };
         }, 1000);
-      }
+      };
 
     // Results Page
     function resultsPage() {
         
         // What is displayed
-        $(".initialPage").css("display", "none");
-        $("#results").css("display", "block");
-        $(".questionsContainer").css("display", "none");
         $(".resultContainer").css("display", "block");
-        $("#scoreOne").css("display","none");
-        $("#timeOne").css("display","none");
+        $(".results").css("display", "block");
+        $(".questionsContainer").css("display", "none");
+        $(".initialPage").css("display", "none");
+        $(".scoreOne").css("display","none");
+        $(".timeOne").css("display","none");
 
         // clear list
-        $("#resultsList").text("");
+        $(".resultsList").text("");
 
         // When a user logs their score
         for (var i = 0; i < highScores.length; i++) {
@@ -231,46 +232,48 @@ $(document).ready(function(){
             var list = $("<li>");
             list.text(high);
             list.attr("data-index", i);
+            list.attr("class", "highScoreList");
 
             var removeButton = $("<button>");
-            removeButton.text("remove");
+            removeButton.attr("class", "remove");
+            removeButton.text("x");
 
             list.append(removeButton);
-            $("#resultsList").append(list);
-        }
-    }
+            $(".resultsList").append(list);
+        };
+    };
 
     // Retrieving high scores from local storage
     function getHighScores() {
         var savedHighScores = JSON.parse(localStorage.getItem("highScores"));
         if (savedHighScores !== null) {
             highScores = savedHighScores;
-        }
+        };
         resultsPage();
-    }
+    };
 
     // Saving high scores to local storage
     function saveHighScores() {
         localStorage.setItem("highScores", JSON.stringify(highScores));
-    }
+    };
 
     // When the user submits their name
-    $("#resultsForm").on("submit", function(event) {
+    $(".resultsForm").on("submit", function(event) {
         event.preventDefault();
         var highScoreText = $("#resultsText").val();
         if (highScoreText === "") {
             return;
-        }
+        };
 
-        highScores.push(highScoreText + ":" +  " Score = " + counter + " TimeLeft = " + totalTime + " ");
-        $("#resultsText").val("");
+        highScores.push(highScoreText + ":" +  " Score = " + counter + " TimeLeft = " + (totalTime +1) + " ");
+        $(".resultsText").val("");
 
         resultsPage();
         saveHighScores();
-    })
+    });
             
     // Removing a high score from the list
-    $("#resultsList").on("click", function(event) {
+    $(".resultsList").on("click", function(event) {
         var input = event.target;
 
         if (input.matches("button") === true) {
